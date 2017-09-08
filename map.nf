@@ -246,8 +246,8 @@ process clusterBarcodes {
    publishDir path:"${params.out}/map/barcodes_cluster/", mode:'symlink'
    
    // Cluster options
-   cpus 12
-   memory '64GB'
+   cpus 8
+   memory '16GB'
 
    input:
    set file(barcodes), file(reads), sample from raw_barcodes
@@ -269,8 +269,8 @@ process mapIntegs {
    publishDir path:"${params.out}/map/mapping/", mode:'symlink'
 
    // Cluster options
-   cpus 12
-   memory '32GB'
+   cpus 8
+   memory '16GB'
 
    input:
    set file(integ_sites), sample from loci_map

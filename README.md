@@ -10,11 +10,75 @@ The following packages are required to run the pipeline:
 - Nextflow ([website](https://www.nextflow.io/))
 - Docker ([website](https://docker.com/))
 
-#### Installing prerequisites:
+#### 2.1. Installing prerequisites:
 Docker and Nextflow must be downloaded following the instructions on their official websites.
 To install *JRE7* and *Python 2.7* in *Ubuntu 14.04*, type in a terminal:
 ```
 sudo apt-get install openjdk-7-jre python2.7
+```
+
+#### 2.2. Checking prerequisites:
+Once all prerequisites have been sucessfully installed, you should be able to run the following commands:
+
+----
+##### JRE 7
+Type:
+```
+java -version
+```
+output:
+```
+java version "1.7.0_131"
+OpenJDK Runtime Environment (IcedTea 2.6.9) (7u131-2.6.9-0ubuntu0.14.04.2)
+OpenJDK 64-Bit Server VM (build 24.131-b00, mixed mode)
+```
+
+----
+##### Python 2.7
+Type:
+```
+python --version
+```
+output:
+```
+Python 2.7.12 :: Continuum Analytics, Inc.
+```
+
+----
+##### Nextflow
+Type:
+```
+nextflow -v
+```
+output:
+```
+nextflow version 0.24.2.4271
+```
+
+----
+##### Docker
+Type:
+```
+docker -v
+```
+output:
+```
+Docker version 17.05.0-ce, build 89658be
+```
+Make sure that your Linux user belongs to the group `docker` and that the docker service is running:
+```
+sudo docker service start
+```
+If everything is set correctly, you should be able to run:
+```
+docker run --rm ezorita/bioinformatics bwa
+```
+and get the following output:
+```
+Program: bwa (alignment via Burrows-Wheeler transformation)
+Version: 0.7.15-r1142-dirty
+Contact: Heng Li <lh3@sanger.ac.uk>
+(...)
 ```
 
 ### 3. Running the pipeline:
@@ -41,9 +105,8 @@ sequencing files that will be processed. Detailed instructions are provided insi
 In this example, all `.cfg` files are set to work with the example files provided along with the pipeline
 sources (see `examples` folder).
 
-#### 3.3. Generate a bwa index (optional)
-Run this step only if you don't have yet an index of the Human Genome reference for `bwa`
-([repository](https://github.com/lh3/bwa)). To build a `bwa` index of *hg19*:
+#### 3.3. Generate a bwa index
+Run the following commands to build a `bwa` index of *hg19*:
 ```
 wget http://hgdownload.cse.ucsc.edu/goldenpath/hg19/bigZips/chromFa.tar.gz
 tar -Oxf chromFa.tar.gz > ref-genome.fasta

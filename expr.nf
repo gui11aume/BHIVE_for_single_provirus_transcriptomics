@@ -103,7 +103,7 @@ mfile.eachLine { line ->
         if (t[-1] =~ /^SRR|^ERR|^DRR/ || t[-1] =~ /^http|^ftp/) {
            file_getref << [ t[-1], [names[status],t[0],t[1]] ]
         } else {
-           reads = file("$t[-1]")
+           reads = file("${t[-1]}")
            if (reads.isFile()) {
               datasets << [ reads, [names[status],t[0],t[1]] ]
            } else {
@@ -326,7 +326,7 @@ process computeExpression {
      hivexpr = merge(integs, allcnt, by=c('brcd','rep'))
 
      # Write table
-     write.table(hivexpr, file='hiv_expression.txt', sep='\\t', quote=FALSE, row.names=FALSE, col.names=TRUE)
+     write.table(hivexpr, file='hiv_expression.txt', sep='\\t', quote=FALSE, row.names=FALSE, col.names=TRUE, append=TRUE)
 
      # Create figures dir
      dir.create('figures', showWarnings = FALSE)
